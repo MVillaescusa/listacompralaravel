@@ -9,7 +9,7 @@
         @if( true || Auth::check() )
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item {{ Request::is('catalog') && ! Request::is('catalog/create')? 'active' : ''}}">
+                    <li class="nav-item {{ Request::is('productos') && ! Request::is('productos/create')? 'active' : ''}}">
                         <a class="nav-link" href="{{url('/productos')}}">
                             <span class="glyphicon glyphicon-film" aria-hidden="true"></span>
                             Catálogo
