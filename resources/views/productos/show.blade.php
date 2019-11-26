@@ -14,8 +14,13 @@
         <h2>{{ $producto->nombre }}</h2>
         <h5>Categoria: {{ $producto->categoria }}</h5>
 
-            <p>Estado: Producto actualmente comprado</p>
-            <button type="button" class="btn btn-danger">Pendiente de compra</button>
+            @if ($producto->pendiente)
+                <p>Estado: Producto pendiente de compra</p>
+                <button type="button" class="btn btn-danger">Comprar</button>
+            @else 
+                <p>Estado: Producto actualmente comprado</p>
+                <button type="button" class="btn btn-danger">Comprado</button>
+            @endif
 
 
             <a class="btn btn-warning" href="{{ url('/productos/edit/' . $producto->id ) }}">
