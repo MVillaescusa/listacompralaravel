@@ -9,7 +9,7 @@ class ProductoController extends Controller
 {
     function getIndex(){
         $productos = Producto::all();
-        return view('productos.index', array('arrayProductos'=>$prductos));
+        return view('productos.index', array('arrayProductos'=>$productos));
         /*return view('productos.index', array('arrayProductos'=>$this->arrayProductos));*/
     }
 
