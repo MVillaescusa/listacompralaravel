@@ -59,5 +59,13 @@ class ProductoController extends Controller
         return redirect(action('ProductoController@getShow', ['id' => $producto->id]));
     }
 
+    public function changeSelled(Request $request){
+        $producto = Producto::findOrFail($request->input('id'));
+        $producto->pendiente = !$producto->pendiente;
+        $producto->save();
+
+        return redirect(action('ProductoController@getShow', ['id' => $producto->id]));
+    }
+
     
 }

@@ -14,19 +14,23 @@
         <h2>{{ $producto->nombre }}</h2>
         <h5>Categoria: {{ $producto->categoria }}</h5>
 
+        <form action="{{action('ProductoController@changeSelled')}}" method="POST">
+            {{method_field('PUT')}}
+            @csrf
+
+            <input type="hidden" id="id" name="id" value="{{$producto->id}}">
             @if ($producto->pendiente)
                 <p>Estado: Producto pendiente de compra</p>
-                <button type="button" class="btn btn-danger">Comprar</button>
+                <button type="submit" class="btn btn-primary">Comprar</button>
             @else 
                 <p>Estado: Producto actualmente comprado</p>
-                <button type="button" class="btn btn-danger">Comprado</button>
+                <button type="submit" class="btn btn-danger">Devolver</button>
             @endif
-
-
             <a class="btn btn-warning" href="{{ url('/productos/edit/' . $producto->id ) }}">
                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                 Editar producto</a>
         <button type="button" class="btn btn-default">Volver al listado</button>
+        </form>  
 
     </div>
 </div>
