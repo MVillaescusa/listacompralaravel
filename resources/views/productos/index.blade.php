@@ -1,11 +1,8 @@
-@extends('layouts.master')
+@extends('layouts.app')
 
 @section('content')
 
 <div class="row">
- @php
- $key = 0;
- @endphp
     @foreach( $arrayProductos as $producto )
     <div class="col-xs-6 col-sm-4 col-md-3 text-center">
 
@@ -17,9 +14,6 @@
         </a>
 
     </div>
-        @php
-            $key++;
-        @endphp
     @endforeach
 
 </div>

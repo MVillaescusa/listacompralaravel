@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Producto;
+use App\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,6 +16,8 @@ class DatabaseSeeder extends Seeder
         // $this->call(UsersTableSeeder::class);
         self::seedProductos();
         $this->command->info('Tabla productos inicializada con datos!');
+        self::seedUsers();
+        $this->command->info('Tabla usuarios inicializada con datos!');
     }
 
     public function seedProductos(){
@@ -28,7 +31,26 @@ class DatabaseSeeder extends Seeder
         }
     }
 
-    /*private static $arrayProductos = array(
+    public function seedUsers(){
+        User::truncate();
+
+        $u = new User;
+        $u->name = "Mario";
+        $u->nombre = "Mario";
+        $u->apellidos = "Villaescusa";
+        $u->email = "mario@mario.es";
+        $u->password = bcrypt("supermario");
+        $u->save();
+        $u = new User;
+        $u->name = "Pepe";
+        $u->nombre = "Pepe";
+        $u->apellidos = "Lopez";
+        $u->email = "pepe@pepe.es";
+        $u->password = bcrypt("superpepe");
+        $u->save();
+    }
+
+    private static $arrayProductos = array(
         array('Aceite','Aceites y grasas'),
         array('Aceite de oliva','Aceites y grasas'),
         array('Grasa comestible','Aceites y grasas'),
@@ -323,5 +345,5 @@ class DatabaseSeeder extends Seeder
         array('Servilletas de papel','Limpieza del hogar'),
         array('Suavizante ropa','Limpieza del hogar'),
         array('Toalla de papel','Limpieza del hogar')
-        );*/
+        );
 }
