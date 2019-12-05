@@ -7,10 +7,20 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class ProductoController extends Controller {
-    function getIndex() {
-        $productos = Producto::all();
-        return view('productos.index', array('arrayProductos' => $productos));
+    function getIndex($categoria) {
+        if (isset($categoria)) {
+            $productos = Producto::where('categoria', $categoria)->get();
+            return view('productos.index', array('arrayProductos' => $productos));
+        } else {
+            $productos = Producto::all();
+            return view('productos.index', array('arrayProductos' => $productos));
+        }
         /*return view('productos.index', array('arrayProductos'=>$this->arrayProductos));*/
+    }
+
+    public function getCategorias() {
+        $categorias = Producto::select('categoria')->distinct()->get();
+        return view('productos.categorias', array('arrayCategorias' => $categorias));
     }
 
     public function getShow($id) {

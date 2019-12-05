@@ -15,7 +15,9 @@ Route::get('/', 'HomeController@getHome');
 
 Route::group(['prefix' => 'productos', 'middleware' => 'auth'], function () {
 
-    Route::get('/', 'ProductoController@getIndex');
+    Route::get('/categorias', 'ProductoController@getCategorias');
+
+    Route::get('/{categoria?}', 'ProductoController@getIndex');
 
     Route::get('/show/{id}', 'ProductoController@getShow')
         ->where('id', '[0-9]+');
