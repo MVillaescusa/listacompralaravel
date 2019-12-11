@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Producto;
 use App\User;
+use Illuminate\Support\Facades\Schema;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,11 +14,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        Schema::disableForeignKeyConstraints();
         // $this->call(UsersTableSeeder::class);
         self::seedProductos();
         $this->command->info('Tabla productos inicializada con datos!');
         self::seedUsers();
         $this->command->info('Tabla usuarios inicializada con datos!');
+
+        Schema::enableForeignKeyConstraints();
     }
 
     public function seedProductos(){

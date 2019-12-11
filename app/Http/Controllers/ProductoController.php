@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Producto;
+use App\ProductoUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class ProductoController extends Controller {
-    function getIndex($categoria) {
-        if (isset($categoria)) {
+    function getIndex($categoria = "categorias") {
+        if (isset($categoria) && $categoria != "categorias") {
             $productos = Producto::where('categoria', $categoria)->get();
             return view('productos.index', array('arrayProductos' => $productos));
         } else {
@@ -25,9 +26,15 @@ class ProductoController extends Controller {
 
     public function getShow($id) {
         $producto = Producto::findOrFail($id);
+        try {
+            $compra = ProductoUser::where('producto_id', $id)->where('user_id', auth()->id())->firstOrFail();
+        } catch (\Throwable $th) {
+            $compra = null;
+        }
         return view('productos.show', array(
             'producto' => $producto,
             'id' => $id,
+            'compra' => $compra,
         ));
         /*return view('productos.show', array('producto'=>$this->arrayProductos[$id]));*/
     }
@@ -74,11 +81,17 @@ class ProductoController extends Controller {
     }
 
     public function changeSelled(Request $request) {
-        $producto = Producto::findOrFail($request->input('id'));
-        $producto->pendiente = !$producto->pendiente;
-        $producto->save();
+        try {
+            $compra = ProductoUser::where('producto_id', '=', $request->input('id'))->where('user_id', '=', auth()->id())->firstOrFail();
+            $compra->delete();
+        } catch (\Throwable $th) {
+            $compra = new ProductoUser;
+            $compra->producto_id = $request->input('id');
+            $compra->user_id = auth()->id();
+            $compra->save();
+        }
 
-        return redirect(action('ProductoController@getShow', ['id' => $producto->id]));
+        return redirect(action('ProductoController@getShow', ['id' => $request->input('id')]));
     }
 
 }

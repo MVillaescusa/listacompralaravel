@@ -19,12 +19,12 @@
             @csrf
 
             <input type="hidden" id="id" name="id" value="{{$producto->id}}">
-            @if ($producto->pendiente)
-                <p>Estado: Producto pendiente de compra</p>
-                <button type="submit" class="btn btn-primary">Comprar</button>
+            @if ((isset($compra)) && ($compra->user_id == auth()->id()))
+                <p>Estado: Producto en la lista de la compra</p>
+                <button type="submit" class="btn btn-primary">Comprado</button>
             @else 
-                <p>Estado: Producto actualmente comprado</p>
-                <button type="submit" class="btn btn-danger">Devolver</button>
+                <p>Estado: Producto comprado</p>
+                <button type="submit" class="btn btn-primary">Añadir a la lista</button>
             @endif
             <a class="btn btn-warning" href="{{ url('/productos/edit/' . $producto->id ) }}">
                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
