@@ -13,21 +13,26 @@
 
 Route::get('/', 'HomeController@getHome');
 
-Route::group(['prefix' => 'productos', 'middleware' => 'auth'], function () {
+Route::group(['middleware' => 'auth'], function () {
 
-    Route::get('/categorias', 'ProductoController@getCategorias');
+    Route::get('categorias', 'ProductoController@getCategorias');
 
-    Route::get('/{categoria?}', 'ProductoController@getIndex');
+    Route::get('categorias/{categoria}', 'ProductoController@getCategoria');
 
-    Route::get('/show/{id}', 'ProductoController@getShow')
-        ->where('id', '[0-9]+');
+    Route::resource('productos', 'ProductoController');
 
-    Route::get('/create', 'ProductoController@getCreate');
-    Route::post('/create', 'ProductoController@postCreate');
 
-    Route::get('/edit/{id}', 'ProductoController@getEdit')
-        ->where('id', '[0-9]+');
-    Route::put('/edit', 'ProductoController@putEdit');
+    //Route::get('/{categoria?}', 'ProductoController@index');
+
+    //Route::get('/show/{id}', 'ProductoController@getShow')
+       // ->where('id', '[0-9]+');
+
+    //Route::get('/create', 'ProductoController@getCreate');
+    //Route::post('/create', 'ProductoController@postCreate');
+
+    //Route::get('/edit/{id}', 'ProductoController@getEdit')
+        //->where('id', '[0-9]+');
+    //Route::put('/edit', 'ProductoController@putEdit');
 
     Route::put('changeSelled', 'ProductoController@changeSelled');
 

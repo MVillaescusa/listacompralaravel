@@ -6,7 +6,7 @@
     @foreach( $arrayProductos as $producto )
     <div class="col-xs-6 col-sm-4 col-md-3 text-center">
 
-        <a href="{{ url('/productos/show/' . $producto->id ) }}">
+        <a href="{{ url('/productos/' . $producto->id ) }}">
         @if (isset($producto->imagen))
             <img src="{{asset('storage/' . $producto->imagen)}}" style="height:200px"/>
         @else

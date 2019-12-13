@@ -10,7 +10,7 @@
          </div>
          <div class="card-body" style="padding:30px">
 
-         <form action="{{ action('ProductoController@postCreate') }}" method="POST" enctype="multipart/form-data">
+         <form action="{{ action('ProductoController@store') }}" method="POST" enctype="multipart/form-data">
 
             @csrf
 

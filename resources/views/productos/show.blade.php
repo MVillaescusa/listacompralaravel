@@ -32,6 +32,11 @@
         <button type="button" class="btn btn-default">Volver al listado</button>
         </form>  
 
+        <form action="{{action('ProductoController@destroy', ['producto' => $producto])}}" method="POST">
+            {{method_field('DELETE')}}
+            @csrf
+            <button type="submit" onclick="return confirm('¿Seguro que desea eliminar ésta película?')" class="btn btn-danger">Eliminar producto</button>
+        </form>  
     </div>
 </div>
 

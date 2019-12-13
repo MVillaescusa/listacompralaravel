@@ -5,7 +5,7 @@
 <div class="row">
         <ul>
     @foreach( $arrayCategorias as $categoria )
-            <li><a href="{{ url('productos/' . $categoria->categoria ) }}">
+            <li><a href="{{ url('categorias/' . $categoria->categoria ) }}">
                     {{$categoria->categoria}}                
                 </a>
             </li>
