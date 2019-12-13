@@ -122,6 +122,7 @@ class ProductoController extends Controller {
      */
     public function destroy(Producto $producto) {
         $producto->delete();
+        Storage::disk('public')->delete($producto->imagen);
         return redirect(action('ProductoController@index'));
     }
 
